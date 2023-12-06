@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  db:
+    build:
+      context: ./custom-db
+    environment:
+      POSTGRES_DB: task_management
+      POSTGRES_USER: sinulingga
+      POSTGRES_PASSWORD: Password123456
+    ports:
+      - 5432:5432
+    networks:
+      - tasknetwork
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+
+  taskmanagement:
+    build:
+      context: .
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    networks:
+      - tasknetwork
+
+networks:
+  tasknetwork:
+    driver: bridge
