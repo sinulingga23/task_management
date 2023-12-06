@@ -1,6 +1,7 @@
 package app.sinulingga.taskmanagement.entity;
 
 
+import app.sinulingga.taskmanagement.definition.TaskStatus;
 import jakarta.persistence.*;
 
 import java.util.UUID;
@@ -18,6 +19,10 @@ public class TaskManagement extends BaseEntity {
 
     @Column(name = "description", nullable = false)
     private String description;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "task_status", nullable = true)
+    private TaskStatus taskStatus;
 
     public TaskManagement() {
 
@@ -45,6 +50,14 @@ public class TaskManagement extends BaseEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public TaskStatus getTaskStatus() {
+        return taskStatus;
+    }
+
+    public void setTaskStatus(TaskStatus taskStatus) {
+        this.taskStatus = taskStatus;
     }
 
     @Override
